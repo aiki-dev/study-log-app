@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Study App</title>
+</head>
+<body>
+    <h1>勉強記録アプリ</h1>
+    <!-- 勉強時間を入力するフォーム -->
+    <form method="POST">
+        <input type="text" name="study_time" placeholder="勉強時間を入力">
+        <button type="submit">送信</button>
+    </form>
+
+    <!-- Flaskから渡されたメッセージを表示 -->
+    <p>{{msg}}</p>
+</body>
+</html>
