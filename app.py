@@ -12,7 +12,7 @@ def home():
         study_time = request.form["study_time"]
 
         # CSVに追記保存（過去データを消さない）
-        with open("study_log.csv", "a", newline="") as file:
+        with open("study_log.csv", "a", newline="", encoding="utf-8") as file:
             writer = csv.writer(file)
             writer.writerow([study_time])
 
