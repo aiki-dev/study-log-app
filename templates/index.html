@@ -6,13 +6,23 @@
 </head>
 <body>
     <h1>勉強記録アプリ</h1>
-    <!-- 勉強時間を入力するフォーム -->
+    <!-- 学習記録を入力するフォーム -->
     <form method="POST">
-        <input type="text" name="study_time" placeholder="勉強時間を入力">
+        <p>日付</p>
+        <input type="date" name="study_date">
+
+        <p>科目</p>
+        <input type="text" name="subject" placeholder="科目を入力してください">
+
+        <p>勉強時間（分）</p>
+        <input type="text" name="study_time" placeholder="学習時間を入力してください">
+
+        <br><br>
         <button type="submit">送信</button>
     </form>
 
     <!-- Flaskから渡されたメッセージを表示 -->
     <p>{{msg}}</p>
+    <p>{{error}}</p>
 </body>
 </html>
