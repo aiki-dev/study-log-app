@@ -1,8 +1,12 @@
 from flask import Flask, render_template, request
 import csv
+import os
 from datetime import datetime
 
 app = Flask(__name__)
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+CSV_PATH = os.path.join(BASE_DIR, "study_log.csv")
 
 #　"/"にアクセスした時の処理（GETは表示、POSTは送信）
 @app.route("/", methods=["GET", "POST"])
@@ -34,7 +38,7 @@ def home():
                         error = "学習時間は1~1440の範囲で入力してください。"
             if error == "":
                 # CSVに追記保存（過去データを消さない）
-                with open("study_log.csv", "a", newline="", encoding="utf-8") as file:
+                with open(CSV_PATH, "a", newline="", encoding="utf-8") as file:
                     writer = csv.writer(file)
                     writer.writerow([study_date, subject, study_time])
 
