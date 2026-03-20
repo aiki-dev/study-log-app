@@ -38,3 +38,14 @@ PythonとFlaskを使って作成した、学習時間を記録するWebアプリ
    python app.py
 5. ブラウザでアクセス
    http://127.0.0.1:5000
+
+## テスト工程
+
+本アプリをテスト対象（SUT）として、以下の工程を実施しました。
+
+- 要件定義（docs/requirements.md）
+- テスト計画（docs/test_plan.md）
+- テスト設計（docs/test_design.md）
+- テストケース作成（docs/test_cases.md）
+- テスト結果（docs/test_results.md）
+- 不具合報告（docs/bug_report.md）
