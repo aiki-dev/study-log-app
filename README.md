@@ -8,8 +8,8 @@ PythonとFlaskを使って作成した、学習時間を記録するWebアプリ
 さらに、本アプリをテスト対象（SUT）として、要件定義から不具合報告までのテスト工程を一通り実施しました。
 
 ## 使用技術
-- Python
-- Flask
+- Python 3.14.3
+- Flask 3.1.2
 - HTML
 - CSVファイル
 - Git / GitHub
