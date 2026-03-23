@@ -1,3 +1,4 @@
 .venv/
 study_log.csv
 勉強用１.py
+__pycache__/
