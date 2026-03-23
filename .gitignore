@@ -2,3 +2,4 @@
 study_log.csv
 勉強用１.py
 __pycache__/
+.pytest_cache/
