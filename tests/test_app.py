@@ -30,7 +30,7 @@ def test_home_page_title(test_resources):
     response = test_client.get("/")
     assert "勉強記録アプリ" in response.data.decode("utf-8")
 
-# 日付が空欄のときにエラーメッセージが出るか確認
+# 日付が空欄のときにエラーメッセージが出て保存されないか確認
 def test_blank_date_error(test_resources):
     test_client, test_csv = test_resources
     response = test_client.post("/", data={
@@ -39,6 +39,7 @@ def test_blank_date_error(test_resources):
         "study_time": "60"
     })
     assert "すべての項目を入力してください。" in response.data.decode("utf-8")
+    assert not test_csv.exists()
 
 # 学習時間に文字を入れたときにエラーが出るか確認
 def test_string_time_error(test_resources):
