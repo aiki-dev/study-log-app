@@ -79,3 +79,14 @@ def test_valid_input_saves_data(test_resources):
 
     content = test_csv.read_text(encoding="utf-8")
     assert "2026-03-01,数学,60" in content
+
+# 学習時間に1441を入れたときにエラーが出て保存されないか確認
+def test_over_max_time_error(test_resources):
+    test_client, test_csv = test_resources
+    response = test_client.post("/", data={
+        "study_date": "2026-03-01",
+        "subject": "数学",
+        "study_time": "1441"
+    })
+    assert "学習時間は1~1440の範囲で入力してください。" in response.data.decode("utf-8")
+    assert not test_csv.exists()
