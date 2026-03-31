@@ -49,3 +49,5 @@ PythonとFlaskを使って作成した、学習時間を記録するWebアプリ
 - テストケース作成（docs/test_cases.md）
 - テスト結果（docs/test_results.md）
 - 不具合報告（docs/bug_report.md）
+
+pytestを用いて代表的な正常系・異常系・境界値テストを9件実施し、全件成功を確認しました。
