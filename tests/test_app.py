@@ -30,7 +30,7 @@ def test_home_page_title(test_resources):
     response = test_client.get("/")
     assert "勉強記録アプリ" in response.data.decode("utf-8")
 
-# 日付が空欄のときにエラーメッセージが出て保存されないか確認
+# TC-02 日付が空欄のときにエラーメッセージが出て保存されないか確認
 def test_blank_date_error(test_resources):
     test_client, test_csv = test_resources
     response = test_client.post("/", data={
@@ -41,7 +41,7 @@ def test_blank_date_error(test_resources):
     assert "すべての項目を入力してください。" in response.data.decode("utf-8")
     assert not test_csv.exists()
 
-# 学習時間に文字を入れたときにエラーが出るか確認
+# TC-06 学習時間に文字を入れたときにエラーが出るか確認
 def test_string_time_error(test_resources):
     test_client, test_csv = test_resources
     response = test_client.post("/", data={
@@ -51,7 +51,7 @@ def test_string_time_error(test_resources):
     })
     assert "学習時間は整数で入力してください。" in response.data.decode("utf-8")
 
-# 学習時間に0を入れたときにエラーが出るか確認
+# TC-08 学習時間に0を入れたときにエラーが出るか確認
 def test_zero_time_error(test_resources):
     test_client, test_csv = test_resources
     response = test_client.post("/", data={
@@ -61,7 +61,7 @@ def test_zero_time_error(test_resources):
     })
     assert "学習時間は1~1440の範囲で入力してください。" in response.data.decode("utf-8")
 
-# 正常入力でCSVに保存されることを確認
+# TC-01 正常入力で保存成功メッセージが表示され、CSVに保存されることを確認
 def test_valid_input_saves_data(test_resources):
     test_client, test_csv = test_resources
 
@@ -80,7 +80,7 @@ def test_valid_input_saves_data(test_resources):
     content = test_csv.read_text(encoding="utf-8")
     assert "2026-03-01,数学,60" in content
 
-# 学習時間に1441を入れたときにエラーが出て保存されないか確認
+# TC-11 学習時間に1441を入れたときにエラーが出て保存されないか確認
 def test_over_max_time_error(test_resources):
     test_client, test_csv = test_resources
     response = test_client.post("/", data={
@@ -91,7 +91,7 @@ def test_over_max_time_error(test_resources):
     assert "学習時間は1~1440の範囲で入力してください。" in response.data.decode("utf-8")
     assert not test_csv.exists()
 
-# 学習時間に1440を入れたときに正常に保存されるか確認
+# TC-10 学習時間に1440を入れたときに正常に保存されるか確認
 def test_max_time_valid_save(test_resources):
     test_client, test_csv = test_resources
 
@@ -110,7 +110,7 @@ def test_max_time_valid_save(test_resources):
     content = test_csv.read_text(encoding="utf-8")
     assert "2026-03-01,数学,1440" in content
 
-# 学習時間に1を入れたときに正常に保存されるか確認
+# TC-09 学習時間に1を入れたときに正常に保存されるか確認
 def test_min_time_valid_save(test_resources):
     test_client, test_csv = test_resources
 
