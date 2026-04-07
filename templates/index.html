@@ -22,7 +22,49 @@
     </form>
 
     <!-- Flaskから渡されたメッセージを表示 -->
-    <p>{{msg}}</p>
-    <p>{{error}}</p>
+    <p>{{ msg }}</p>
+    <p>{{ error }}</p>
+
+    <h2>学習記録の検索</h2>
+
+    <form method="GET">
+        <p>科目</p>
+        <input type="text" name="search_subject" placeholder="科目名を入力" value="{{ search_subject }}">
+
+        <p>開始日</p>
+        <input type="date" name="search_from" value="{{ search_from }}">
+
+        <p>終了日</p>
+        <input type="date" name="search_to" value="{{ search_to }}">
+
+        <br><br>
+        <button type="submit">検索</button>
+    </form>
+
+    <h2>学習記録一覧</h2>
+
+    {% if records %}
+        <table border="1">
+            <tr>
+                <th>日付</th>
+                <th>科目</th>
+                <th>学習時間（分）</th>
+            </tr>
+            {% for record in records %}
+            <tr>
+                <td>{{ record.study_date }}</td>
+                <td>{{ record.subject }}</td>
+                <td>{{ record.study_time }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+{% else %}
+    {% if error %}
+    {% elif search_subject or search_from or search_to %}
+        <p>該当する記録がありません。</p>
+    {% else %}
+        <p>表示する記録がありません。</p>
+    {% endif %}
+{% endif %}
 </body>
 </html>

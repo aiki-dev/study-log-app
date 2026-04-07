@@ -14,6 +14,17 @@ app.config["CSV_PATH"] = DEFAULT_CSV_PATH
 def home():
     message = ""
     error = ""
+    records = []
+    search_subject = ""
+    search_from = ""
+    search_to = ""
+
+    search_subject = request.args.get("search_subject", "")
+    search_from = request.args.get("search_from", "")
+    search_to = request.args.get("search_to", "")
+
+    if search_from and search_to and search_from > search_to:
+        error = "日付の範囲が正しくありません。"
 
     if request.method == "POST":
         study_date = request.form["study_date"]
@@ -45,7 +56,39 @@ def home():
 
                 message = f"{study_date} / {subject} / {study_time}分 を保存しました。"
 
-    return render_template("index.html", msg=message, error=error)
+    # CSVからデータを読み込む
+    if os.path.exists(app.config["CSV_PATH"]):
+        with open(app.config["CSV_PATH"], "r", encoding="utf-8") as file:
+            reader = csv.reader(file)
+            for row in reader:
+                if len(row) == 3:
+                    record_date = row[0]
+                    record_subject = row[1]
+                    record_time = row[2]
+
+                    if search_subject and search_subject not in record_subject:
+                        continue
+
+                    if search_from and record_date < search_from:
+                        continue
+
+                    if search_to and record_date > search_to:
+                        continue
+
+                    records.append({
+                        "study_date": record_date,
+                        "subject": record_subject,
+                        "study_time": record_time
+                    })
+    return render_template(
+        "index.html",
+        msg=message,
+        error=error,
+        records=records,
+        search_subject=search_subject,
+        search_from=search_from,
+        search_to=search_to,
+    )
 
 #　このファイルを直接実行した時のみアプリ起動
 if __name__ == "__main__":
