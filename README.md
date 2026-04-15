@@ -10,6 +10,7 @@ PythonとFlaskを使って作成した、学習時間を記録するWebアプリ
 ## 使用技術
 - Python 3.14.3
 - Flask 3.1.2
+- pytest
 - HTML
 - CSVファイル
 - Git / GitHub
